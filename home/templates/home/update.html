@@ -35,8 +35,8 @@
                                                 {{ form.image.errors }}
 
                                                 <label for="id_image">
-                                                    {% if form.image.value %}
-                                                        <img id="preview-image" alt="post image" width="130" class="rounded mb-2 img-thumbnail mr-2" src="{{ form.image.value }}">
+                                                    {% if form.instance.image %}
+                                                        <img id="preview-image" alt="post image" width="130" class="rounded mb-2 img-thumbnail mr-2" src="{{ form.instance.image.url }}">
 {#                                                        <img src="{{ post.image.url }}" width="300" height="300">#}
                                                     {% else %}
                                                         <img src="{% static 'images/default-image-post.jpg' %}" alt="default">
