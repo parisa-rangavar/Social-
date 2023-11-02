@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+     <div class="row py-5 px-4">
+            <div class="col-md-5 mx-auto"> <!-- Profile widget -->
+                    <div class="bg-white shadow rounded overflow-hidden">
+
+                            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                                     <form class="" action="" method="post" novalidate>
+                                            {% csrf_token %}
+                                            {{ form.as_p }}
+                                            <input class="btn btn-primary" type="submit" value="Create">
+                                     </form>
+
+                            </div>
+
+
+                    </div>
+                </div>
+        </div>
+
+
+
+
+
+{#    <form action="" method="post" novalidate>#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <input type="submit" value="Create">#}
+{##}
+{#    </form>#}
+
+{% endblock %}

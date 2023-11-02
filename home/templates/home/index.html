@@ -1,0 +1,128 @@
+{#{% extends 'base.html' %}#}
+{#{% load static %}#}
+{##}
+{#{% block content %}#}
+{##}
+{#    <form action="" method="get">#}
+{#        {{ form.as_p }}#}
+{#        <input type="submit" value="Search">#}
+{#    </form><br/><br/>#}
+{##}
+{#    {% for post in posts %}#}
+{#        <a href="{{ post.get_absolute_url }}">#}
+{#            <div>#}
+{#                <h2>{{ post.title }}</h2>#}
+{#                {% if post.image %}#}
+{#                    <img src="{{ post.image.url }}" width="300" height="300">#}
+{#                {% else %}#}
+{#                    <img src="{% static 'images/default-image-post.jpg' %}" alt="default">#}
+{#                {% endif %}#}
+{##}
+{#                                <a href="{{ post.get_absolute_url }}" class="card-body">{{ post.body|truncatewords:8 }}</a>#}
+{#                <p>{{ post.body }}</p>#}
+{#            </div>#}
+{#        </a>#}
+{#        <hr>#}
+{##}
+{#    {% endfor %}#}
+{#    </div>#}
+{#{% endblock %}#}
+
+{% extends 'base.html'  %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container posts-content">
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-lg-6">
+                <div class="card mb-4">
+                  <div class="card-body">
+                      <div class="media mb-3">
+                          {% if post.user.profile.image %}
+                                <img alt="..." width="130" class="rounded mb-2 img-thumbnail" src="{{ post.user.profile.image.url }}">
+                            {% else %}
+                                <img src="{% static 'images/profile-no-image.png' %}" alt="..." width="130" class="rounded mb-2 img-thumbnail" >
+                          {% endif %}
+    {#                  <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="">#}
+                        <div class="media-body ml-3">
+
+                            <h2>{{ post.user.username }}</h2>
+                            {% if post.title %}
+                            <div class="text-muted small">{{ post.title }}</div>
+                            {% else %}
+                            <p></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <p>
+                        <a href="{{ post.get_absolute_url }}" class="card-body">{{ post.body|truncatewords:8 }}</a>
+    {#                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus commodo bibendum. Vivamus laoreet blandit odio, vel finibus quam dictum ut.#}
+                    </p>
+                      {% if post.image %}
+                        <img src="{{ post.image.url }}" width="300" height="300">
+                      {% else %}
+                        <img src="{% static 'images/default-image-post.jpg' %}" alt="default">
+                      {% endif %}
+    {##}
+    {#                <a href="javascript:void(0)" class="ui-rect ui-bg-cover" style="background-image: url('https://bootdey.com/img/Content/avatar/avatar3.png');"></a>#}
+                  </div>
+                  <div class="card-footer">
+                    <a href="javascript:void(0)" class="d-inline-block text-muted">
+                        <strong>{{ post.likes_count }}</strong> <small class="align-middle">Likes</small>
+                    </a>
+                    <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
+                        <strong>{{ post.comment_count }}</strong> <small class="align-middle">Comments</small>
+                    </a>
+{#                    <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">#}
+{#                      <small class="align-middle">Repost</small>#}
+{#                    </a>#}
+                  </div>
+                </div>
+            </div>
+
+        {% endfor %}
+     <div>
+                <form action="" method="get">
+                    {{ form.as_p }}
+                    <input type="submit" value="Search">
+                </form><br/><br/>
+     </div>
+{#        <div class="col-lg-6">#}
+{#            <div class="card mb-4">#}
+{#              <div class="card-body">#}
+{#                <div class="media mb-3">#}
+{#                  <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="d-block ui-w-40 rounded-circle" alt="">#}
+{#                  <div class="media-body ml-3">#}
+{#                    Kenneth Frazier#}
+{#                    <div class="text-muted small">3 days ago</div>#}
+{#                  </div>#}
+{#                </div>#}
+{##}
+{#                <p>#}
+{#                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus commodo bibendum. Vivamus laoreet blandit odio, vel finibus quam dictum ut.#}
+{#                </p>#}
+{#                <a href="javascript:void(0)" class="ui-rect ui-bg-cover" style="background-image: url('https://bootdey.com/img/Content/avatar/avatar1.png');"></a>#}
+{#              </div>#}
+{#              <div class="card-footer">#}
+{#                <a href="javascript:void(0)" class="d-inline-block text-muted">#}
+{#                  <small class="align-middle">#}
+{#                    <strong>123</strong> Likes</small>#}
+{#                </a>#}
+{#                <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">#}
+{#                  <small class="align-middle">#}
+{#                    <strong>12</strong> Comments</small>#}
+{#                </a>#}
+{#                <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">#}
+{#                  <i class="ion ion-md-share align-middle"></i>&nbsp;#}
+{#                  <small class="align-middle">Repost</small>#}
+{#                </a>#}
+{#              </div>#}
+{#            </div>#}
+{#        </div>#}
+    </div>
+</div>
+
+
+{% endblock %}
