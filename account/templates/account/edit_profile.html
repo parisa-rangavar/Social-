@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 {#    <form action="" method="post">#}
@@ -59,7 +60,12 @@
                                                 {{ form.image.errors }}
 
                                                 <label for="id_image">
-                                                    <img id="preview-image" alt="profil image" width="130" class="rounded mb-2 img-thumbnail mr-2" src="{{ user.profile.image.url }}">
+{#                                                    <img id="preview-image" alt="profil image" width="130" class="rounded mb-2 img-thumbnail mr-2" src="{{ user.profile.image.url }}">#}
+                                                        {% if user.profile.image %}
+                                                            <img alt="..." width="130" class="rounded mb-2 img-thumbnail" src="{{ user.profile.image.url }}">
+                                                        {% else %}
+                                                            <img src="{% static 'images/profile-no-image.png' %}" alt="..." width="130" class="rounded mb-2 img-thumbnail" >
+                                                        {% endif %}
                                                 </label>
 
                                                 <input type="file" name="{{ form.image.name }}" id="id_image" style="display: none;" onchange="previewFile(this)">
