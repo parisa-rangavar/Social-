@@ -56,17 +56,21 @@ class PostDeleteView(LoginRequiredMixin,View):
         else:
             messages.error(request,'you cant delete this post','danger')
         return redirect('home:home')
+
+
 class PostUpdateView(LoginRequiredMixin,View):
     form_class = PostCreateUpdateForm
     def setup(self, request, *args, **kwargs):
         self.post_instance= get_object_or_404(Post, pk=kwargs['post_id'])
         return super().setup(request, *args, **kwargs)
+
     def dispatch(self, request, *args, **kwargs):
         post = self.post_instance
         if not post.user.id == request.user.id:
             messages.error(request, 'You cant update this Post', 'danger')
             return redirect('home:home')
         return super().dispatch(request, *args, **kwargs)
+
     def get(self, request, *args, **kwargs):
        post = self.post_instance
        form= self.form_class(instance=post)
@@ -91,12 +95,18 @@ class PostCreateView(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
         form = self.form_class
         return render(request,'home/create.html', {'form':form})
+
+
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             new_post = form.save(commit=False)
             new_post.slug = slugify(form.cleaned_data['body'][:30])
             new_post.user = request.user
+            print(f'{form.cleaned_data}')
+            print(f'{request.FILES}')
+            if 'image' in request.FILES:
+                new_post.image = request.FILES['image']
             new_post.save()
             messages.success(request,'You created a new post','success')
             return redirect('home:post_detail',new_post.id ,new_post.slug)

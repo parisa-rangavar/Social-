@@ -10,7 +10,13 @@
     <p><a href="{% url 'account:user_profile' post.user.id %}">{{ post.user.username }}</a> - {{ post.updated|date:"Y-M" }}</p>
 
     <div>
-        <h2>{{ post.title }}</h2>
+        <h2>
+            {% if post.title %}
+                <div class="text-muted small">{{ post.title }}</div>
+            {% else %}
+                <p></p>
+            {% endif %}
+        </h2>
         {% if post.image %}
             <img class="rounded mb-2 img-thumbnail" src="{{ post.image.url }}">
         {% else %}
