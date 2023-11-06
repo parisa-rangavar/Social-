@@ -8,7 +8,9 @@
 {#        <input type="submit" value="Edit">#}
 {##}
 {#    </form>#}
+    <link rel="stylesheet" href="{% static 'css/css_edit_seite.css' %}">
 
+<div class="row py-5 px-4">
         <div class="row py-5 px-4">
             <div class="col-md-5 mx-auto"> <!-- Profile widget -->
                     <div class="bg-white shadow rounded overflow-hidden">
@@ -36,25 +38,6 @@
                                              {{ form.email}}
                                          </div>
 
-{#                                         <div class="form-group">#}
-{#                                             {{ form.image.errors }}#}
-{#                                             {{ form.image.label}}#}
-{#                                             <img alt="profil image" width="130" class="rounded mb-2 img-thumbnail" src="{{ user.profile.image.url }}">#}
-{#                                             {{ form.image}}#}
-{#                                             <input type="file" name="{{form.image.html_name}}" id="{{form.image.id_for_label}}">#}
-{##}
-{##}
-{#                                         </div>#}
-{##}
-{#                                            <img alt="profil image" width="130" class="rounded mb-2 img-thumbnail" src="{{ user.profile.image.url }}">#}
-{#                                         <div class="form-group">#}
-{#                                                {{ form.image.label_tag }}#}
-{#                                                {{ form.image.errors }}#}
-{##}
-{#                                                    <img alt="profil image" width="130" class="rounded mb-2 img-thumbnail mr-2" src="{{ user.profile.image.url }}">#}
-{#                                                    {{ form.image }}#}
-{##}
-{#                                         </div>#}
                                          <div class="form-group">
                                                 {{ form.image.label_tag }}
                                                 {{ form.image.errors }}
@@ -98,5 +81,6 @@
 
 </body>
 </html>
+</div>
 {% endblock %}
 

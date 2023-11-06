@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
+
+    <link rel="stylesheet" href="{% static 'css/css_edit_seite.css' %}">
+    <div class="row py-5 px-4">
      <div class="row py-5 px-4">
             <div class="col-md-5 mx-auto"> <!-- Profile widget -->
                     <div class="bg-white shadow rounded overflow-hidden">
 
                             <div class="bg-light p-4 d-flex justify-content-end text-center">
                                      <form class="" action="" method="post" enctype="multipart/form-data" novalidate>
-{#                                            {% csrf_token %}#}
+                                            {% csrf_token %}
 {#                                            {{ form.as_p }}#}
                                              <div class="form-group">
                                              {{ form.body.errors }}
@@ -21,8 +25,11 @@
                                                 {{ form.image.label_tag }}
                                                 {{ form.image.errors }}
                                                 {{ form.image }}
-                                                <input class="btn btn-primary" type="submit" value="Create">
+
+{#                                                <input class="btn btn-primary" type="submit" value="Create">#}
                                          </div>
+
+                                         <input class="btn btn-primary" type="submit" value="Create">
                                      </form>
 
 
@@ -32,6 +39,7 @@
                     </div>
                 </div>
         </div>
+    </div>
 
 
 

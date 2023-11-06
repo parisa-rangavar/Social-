@@ -11,6 +11,7 @@ from django.utils.decorators import method_decorator
 
 class HomeView(View):
     form_class = PostSearchForm
+
     def get(self,request):
         # posts = Post.objects.all()
         posts = Post.objects.select_related('user').all()
@@ -48,6 +49,7 @@ class PostDetailView(View):
 
 
 class PostDeleteView(LoginRequiredMixin,View):
+
     def get(self ,request , post_id):
         post = get_object_or_404(Post, pk=post_id)
         if post.user.id == request.user.id:
@@ -60,6 +62,7 @@ class PostDeleteView(LoginRequiredMixin,View):
 
 class PostUpdateView(LoginRequiredMixin,View):
     form_class = PostCreateUpdateForm
+
     def setup(self, request, *args, **kwargs):
         self.post_instance= get_object_or_404(Post, pk=kwargs['post_id'])
         return super().setup(request, *args, **kwargs)
@@ -75,6 +78,7 @@ class PostUpdateView(LoginRequiredMixin,View):
        post = self.post_instance
        form= self.form_class(instance=post)
        return render(request,'home/update.html',{'form':form})
+
 
     def post(self, request, *args, **kwargs):
        post = self.post_instance
@@ -92,6 +96,7 @@ class PostUpdateView(LoginRequiredMixin,View):
 
 class PostCreateView(LoginRequiredMixin,View):
     form_class = PostCreateUpdateForm
+
     def get(self, request, *args, **kwargs):
         form = self.form_class
         return render(request,'home/create.html', {'form':form})
@@ -111,12 +116,13 @@ class PostCreateView(LoginRequiredMixin,View):
             messages.success(request,'You created a new post','success')
             return redirect('home:post_detail',new_post.id ,new_post.slug)
 
+
 class PostAddReplyView(LoginRequiredMixin, View):
     form_class = CommentReplyForm
 
     def post(self,request, post_id, comment_id):
         post = get_object_or_404(Post, id=post_id)
-        comment= get_object_or_404(Comment, id=comment_id)
+        comment = get_object_or_404(Comment, id=comment_id)
         form = self.form_class(request.POST)
         if form.is_valid():
             reply = form.save(commit=False)
@@ -125,18 +131,19 @@ class PostAddReplyView(LoginRequiredMixin, View):
             reply.reply = comment
             reply.is_reply = True
             reply.save()
-            messages.success(request,"your reply submitted successfully","success")
+            messages.success(request, "your reply submitted successfully", "success")
         return redirect('home:post_detail', post.id, post.slug)
 
+
 class PostLikeView(LoginRequiredMixin, View):
-    def get(self, request , post_id):
+    def get(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
         like = Vote.objects.filter(post=post, user=request.user)
         if like.exists():
             messages.error(request, "you have already liked this post", "danger")
         else:
             Vote.objects.create(post=post, user=request.user)
-            messages.success(request,"you liked this post", "success")
+            messages.success(request, "you liked this post", "success")
         return redirect('home:post_detail', post.id, post.slug)
 
 
