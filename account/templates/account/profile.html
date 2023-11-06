@@ -28,6 +28,7 @@
     </style>
 </head>
 <body class="img js-fullheight" style="background-image: url({% static 'images/mountains-backgraund.jpg' %})">
+ {% include 'inc/navbar.html' %}
 
 {% block content %}
     <div class="row py-5 px-4">
@@ -91,7 +92,7 @@
                         <div class="py-4 px-4">
                             <div class="d-flex align-items-center justify-content-between mb-3">
                                 <h5 class="mb-0">Recent photos</h5>
-                                <a href="#" class="btn btn-link text-muted">Show all</a>
+                                <a href="#" class="btn btn-link text-muted">All Photos</a>
                             </div>
 
                             <div class="row">
