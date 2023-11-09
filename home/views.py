@@ -12,12 +12,15 @@ from django.utils.decorators import method_decorator
 class HomeView(View):
     form_class = PostSearchForm
 
-    def get(self,request):
+    def get(self, request):
         # posts = Post.objects.all()
         posts = Post.objects.select_related('user').all()
+        user = request.user
+        profile = user.profile
         if request.GET.get('search'):
             posts = posts.filter(body__contains = request.GET['search'])
-        return render(request,'home/index.html',{'posts':posts,'form':self.form_class})
+        # return render(request, 'home/index.html', {'posts':posts,'form':self.form_class})
+        return render(request, 'home/home.html', {'posts':posts,'form':self.form_class, 'user':user, 'profile': profile})
 
 
 class PostDetailView(View):

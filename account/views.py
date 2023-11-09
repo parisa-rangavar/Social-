@@ -98,6 +98,11 @@ class UserPasswordResetView(auth_views.PasswordResetView):
     success_url = reverse_lazy('account:password_reset_done')
     email_template_name = 'account/password_reset_email.html'
 
+    # def get(self,request):
+    #     form = PasswordResetForm
+    #     # form = self.form_class
+    #     return render(request,self.template_name,{'form':form})
+
 
 class UserPasswordResetDoneView(auth_views.PasswordResetDoneView):
     template_name = 'account/password_reset_done.html'
@@ -106,6 +111,10 @@ class UserPasswordResetDoneView(auth_views.PasswordResetDoneView):
 class UserPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     template_name = 'account/password_reset_confirm.html'
     success_url = reverse_lazy('account:password_reset_complete')
+
+    # def get(self, request, *args, **kwargs):
+    #     form = PasswordResetConfirmForm
+    #     return render(request,self.template_name ,{'form':form})
 
 
 class UserPasswordResetCompleteView(auth_views.PasswordResetCompleteView):

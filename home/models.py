@@ -8,10 +8,10 @@ class Post(models.Model):
                              related_name='posts')
     body = models.TextField()
     slug = models.SlugField()
-    title = models.CharField(max_length=100, null=True, blank=True)
+    title = models.CharField(max_length=100,)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to='post/%Y/%m/%d/', null=True,blank=True)
+    image = models.ImageField(upload_to='post/%Y/%m/%d/',)
     # video_file = models.FileField(upload_to='post_videos/%Y/%m/%d/', null=True)
 
     class Meta:
