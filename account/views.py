@@ -2,7 +2,7 @@ import os
 
 from django.shortcuts import render ,redirect ,get_object_or_404 ,get_list_or_404
 from django.views import View
-from .forms import UserRegistrationForm, UserLoginForm, EditUserForm
+from .forms import UserRegistrationForm, UserLoginForm, EditUserForm, PasswordResetForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -79,6 +79,7 @@ class UserLogoutView(LoginRequiredMixin,View):
         return redirect ('home:home')
 
 
+
 class UserProfileView(LoginRequiredMixin, View):
 
     def get(self,request,user_id):
@@ -98,10 +99,10 @@ class UserPasswordResetView(auth_views.PasswordResetView):
     success_url = reverse_lazy('account:password_reset_done')
     email_template_name = 'account/password_reset_email.html'
 
-    # def get(self,request):
-    #     form = PasswordResetForm
+    def get(self,request):
+        form = PasswordResetForm
     #     # form = self.form_class
-    #     return render(request,self.template_name,{'form':form})
+        return render(request,self.template_name,{'form':form})
 
 
 class UserPasswordResetDoneView(auth_views.PasswordResetDoneView):

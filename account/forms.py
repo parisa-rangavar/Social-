@@ -68,14 +68,14 @@ class EditUserForm(forms.ModelForm):
         model = Profile
         fields = ('age', 'bio', 'image')
 
-# # //Das habe ich neu erstellt
-# class PasswordResetForm(forms.Form):
-#     email = forms.EmailField
-#     def __init__(self, *args, **kwargs):
-#         super(PasswordResetForm, self).__init__(*args, **kwargs)
-#         self.fields['email'].label = ""
-#
-#     email= forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control', 'placeholder': 'Email'}))
+# //Das habe ich neu erstellt
+class PasswordResetForm(forms.Form):
+    email = forms.EmailField
+    def __init__(self, *args, **kwargs):
+        super(PasswordResetForm, self).__init__(*args, **kwargs)
+        self.fields['email'].label = ""
+
+    email= forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control', 'placeholder': 'Email'}))
 
 
 # class PasswordResetConfirmForm(forms.Form):

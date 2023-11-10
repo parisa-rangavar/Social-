@@ -16,7 +16,11 @@ class HomeView(View):
         # posts = Post.objects.all()
         posts = Post.objects.select_related('user').all()
         user = request.user
-        profile = user.profile
+        if user.is_authenticated:
+            profile = user.profile
+        else:
+            profile = None
+            return redirect('account:user_login')
         if request.GET.get('search'):
             posts = posts.filter(body__contains = request.GET['search'])
         # return render(request, 'home/index.html', {'posts':posts,'form':self.form_class})
@@ -78,23 +82,23 @@ class PostUpdateView(LoginRequiredMixin,View):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-       post = self.post_instance
-       form= self.form_class(instance=post)
-       return render(request,'home/update.html',{'form':form})
+        post = self.post_instance
+        form= self.form_class(instance=post)
+        return render(request,'home/update.html',{'form':form})
 
 
     def post(self, request, *args, **kwargs):
-       post = self.post_instance
-       form = self.form_class(request.POST ,request.FILES, instance=post)
-       if form.is_valid():
-           new_post = form.save(commit=False)
-           new_post.slug= slugify(form.cleaned_data['body'][:30])
-           new_post.save()
-           if 'image' in request.FILES:
-               post.image = request.FILES['image']
+        post = self.post_instance
+        form = self.form_class(request.POST ,request.FILES, instance=post)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.slug= slugify(form.cleaned_data['body'][:30])
+            new_post.save()
+            if 'image' in request.FILES:
+                post.image = request.FILES['image']
 
-           messages.success(request,'You updated this post','success')
-           return redirect('home:post_detail',post.id ,post.slug)
+            messages.success(request,'You updated this post','success')
+            return redirect('home:post_detail',post.id ,post.slug)
 
 
 class PostCreateView(LoginRequiredMixin,View):
