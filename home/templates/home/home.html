@@ -39,7 +39,9 @@
             <input type="submit" value="Search">
         </form><br/><br/>
 
-        <img src="{{ profile.image.url }}" width="48" height="48" style=" border-radius: 50%;">
+        {% if profile.image %}
+            <img src="{{ profile.image.url }}" width="48" height="48" style=" border-radius: 50%;">
+        {% endif %}
 
     </div>
 
